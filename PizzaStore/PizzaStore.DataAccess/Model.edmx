@@ -1,0 +1,928 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PizzaStoreDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cheese">
+          <Key>
+            <PropertyRef Name="CheeseID" />
+          </Key>
+          <Property Name="CheeseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Crust">
+          <Key>
+            <PropertyRef Name="CrustID" />
+          </Key>
+          <Property Name="CrustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameId" Type="int" />
+          <Property Name="EmailID" Type="int" />
+          <Property Name="PhoneNumberID" Type="int" />
+          <Property Name="AddressID" Type="int" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Name">
+          <Key>
+            <PropertyRef Name="NameID" />
+          </Key>
+          <Property Name="NameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="75" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaID" Type="int" />
+          <Property Name="PizzaOrderID" Type="int" />
+        </EntityType>
+        <EntityType Name="PhoneNumber">
+          <Key>
+            <PropertyRef Name="PhoneNumberID" />
+          </Key>
+          <Property Name="PhoneNumberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="PizzaID" />
+          </Key>
+          <Property Name="PizzaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CrustID" Type="int" />
+          <Property Name="SauceID" Type="int" />
+          <Property Name="SizeID" Type="int" />
+        </EntityType>
+        <EntityType Name="PizzaCheeses">
+          <Key>
+            <PropertyRef Name="PizzaCheeses" />
+          </Key>
+          <Property Name="PizzaCheeses" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaID" Type="int" />
+          <Property Name="CheeseID" Type="int" />
+        </EntityType>
+        <EntityType Name="PizzaOrder">
+          <Key>
+            <PropertyRef Name="PizzaOrderID" />
+          </Key>
+          <Property Name="PizzaOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+        </EntityType>
+        <EntityType Name="PizzaToppings">
+          <Key>
+            <PropertyRef Name="PizzatoppingsID" />
+          </Key>
+          <Property Name="PizzatoppingsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaID" Type="int" />
+          <Property Name="ToppingID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sauce">
+          <Key>
+            <PropertyRef Name="SauceID" />
+          </Key>
+          <Property Name="SauceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="75" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Topping">
+          <Key>
+            <PropertyRef Name="ToppingID" />
+          </Key>
+          <Property Name="ToppingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_PizzaStore_AddressID">
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerAddress">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_CheeseID">
+          <End Role="Cheese" Type="Self.Cheese" Multiplicity="0..1" />
+          <End Role="PizzaCheeses" Type="Self.PizzaCheeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cheese">
+              <PropertyRef Name="CheeseID" />
+            </Principal>
+            <Dependent Role="PizzaCheeses">
+              <PropertyRef Name="CheeseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_CurstID">
+          <End Role="Crust" Type="Self.Crust" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crust">
+              <PropertyRef Name="CrustID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="CrustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="PizzaOrder" Type="Self.PizzaOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="PizzaOrder">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_EmailID">
+          <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="EmailID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_NameID">
+          <End Role="Name" Type="Self.Name" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Name">
+              <PropertyRef Name="NameID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="NameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PhoneNumberID">
+          <End Role="PhoneNumber" Type="Self.PhoneNumber" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumber">
+              <PropertyRef Name="PhoneNumberID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PhoneNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaID">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PizzaCheeses" Type="Self.PizzaCheeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaCheeses">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaID_Orders">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaOrdersID">
+          <End Role="PizzaOrder" Type="Self.PizzaOrder" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PizzaOrder">
+              <PropertyRef Name="PizzaOrderID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PizzaOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaToppingID">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PizzaToppings" Type="Self.PizzaToppings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaToppings">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_SauceID">
+          <End Role="Sauce" Type="Self.Sauce" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sauce">
+              <PropertyRef Name="SauceID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="SauceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_SizeID">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="SizeID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="SizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_ToppingID">
+          <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+          <End Role="PizzaToppings" Type="Self.PizzaToppings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topping">
+              <PropertyRef Name="ToppingID" />
+            </Principal>
+            <Dependent Role="PizzaToppings">
+              <PropertyRef Name="ToppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaStoreDBModelStoreContainer">
+          <EntitySet Name="Cheese" EntityType="Self.Cheese" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Crust" EntityType="Self.Crust" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Name" EntityType="Self.Name" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="PhoneNumber" EntityType="Self.PhoneNumber" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Pizza" EntityType="Self.Pizza" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="PizzaCheeses" EntityType="Self.PizzaCheeses" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="PizzaOrder" EntityType="Self.PizzaOrder" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="PizzaToppings" EntityType="Self.PizzaToppings" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Sauce" EntityType="Self.Sauce" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="PizzaStore" store:Type="Tables" />
+          <EntitySet Name="Topping" EntityType="Self.Topping" Schema="PizzaStore" store:Type="Tables" />
+          <AssociationSet Name="FK_PizzaStore_AddressID" Association="Self.FK_PizzaStore_AddressID">
+            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_CheeseID" Association="Self.FK_PizzaStore_CheeseID">
+            <End Role="Cheese" EntitySet="Cheese" />
+            <End Role="PizzaCheeses" EntitySet="PizzaCheeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_CurstID" Association="Self.FK_PizzaStore_CurstID">
+            <End Role="Crust" EntitySet="Crust" />
+            <End Role="Pizza" EntitySet="Pizza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_CustomerID" Association="Self.FK_PizzaStore_CustomerID">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PizzaOrder" EntitySet="PizzaOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_EmailID" Association="Self.FK_PizzaStore_EmailID">
+            <End Role="Email" EntitySet="Email" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_NameID" Association="Self.FK_PizzaStore_NameID">
+            <End Role="Name" EntitySet="Name" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PhoneNumberID" Association="Self.FK_PizzaStore_PhoneNumberID">
+            <End Role="PhoneNumber" EntitySet="PhoneNumber" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaID" Association="Self.FK_PizzaStore_PizzaID">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="PizzaCheeses" EntitySet="PizzaCheeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaID_Orders" Association="Self.FK_PizzaStore_PizzaID_Orders">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaOrdersID" Association="Self.FK_PizzaStore_PizzaOrdersID">
+            <End Role="PizzaOrder" EntitySet="PizzaOrder" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaToppingID" Association="Self.FK_PizzaStore_PizzaToppingID">
+            <End Role="Pizza" EntitySet="Pizza" />
+            <End Role="PizzaToppings" EntitySet="PizzaToppings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_SauceID" Association="Self.FK_PizzaStore_SauceID">
+            <End Role="Sauce" EntitySet="Sauce" />
+            <End Role="Pizza" EntitySet="Pizza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_SizeID" Association="Self.FK_PizzaStore_SizeID">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Pizza" EntitySet="Pizza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_ToppingID" Association="Self.FK_PizzaStore_ToppingID">
+            <End Role="Topping" EntitySet="Topping" />
+            <End Role="PizzaToppings" EntitySet="PizzaToppings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzaStoreDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cheese">
+          <Key>
+            <PropertyRef Name="CheeseID" />
+          </Key>
+          <Property Name="CheeseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PizzaCheeses" Relationship="Self.FK_PizzaStore_CheeseID" FromRole="Cheese" ToRole="PizzaCheeses" />
+        </EntityType>
+        <EntityType Name="Crust">
+          <Key>
+            <PropertyRef Name="CrustID" />
+          </Key>
+          <Property Name="CrustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pizzas" Relationship="Self.FK_PizzaStore_CurstID" FromRole="Crust" ToRole="Pizza" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameId" Type="Int32" />
+          <Property Name="EmailID" Type="Int32" />
+          <Property Name="PhoneNumberID" Type="Int32" />
+          <Property Name="AddressID" Type="Int32" />
+          <NavigationProperty Name="CustomerAddress" Relationship="Self.FK_PizzaStore_AddressID" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="PizzaOrders" Relationship="Self.FK_PizzaStore_CustomerID" FromRole="Customer" ToRole="PizzaOrder" />
+          <NavigationProperty Name="Email" Relationship="Self.FK_PizzaStore_EmailID" FromRole="Customer" ToRole="Email" />
+          <NavigationProperty Name="Name" Relationship="Self.FK_PizzaStore_NameID" FromRole="Customer" ToRole="Name" />
+          <NavigationProperty Name="PhoneNumber" Relationship="Self.FK_PizzaStore_PhoneNumberID" FromRole="Customer" ToRole="PhoneNumber" />
+        </EntityType>
+        <EntityType Name="CustomerAddress">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_PizzaStore_AddressID" FromRole="CustomerAddress" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_PizzaStore_EmailID" FromRole="Email" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Name">
+          <Key>
+            <PropertyRef Name="NameID" />
+          </Key>
+          <Property Name="NameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_PizzaStore_NameID" FromRole="Name" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaID" Type="Int32" />
+          <Property Name="PizzaOrderID" Type="Int32" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK_PizzaStore_PizzaID_Orders" FromRole="Orders" ToRole="Pizza" />
+          <NavigationProperty Name="PizzaOrder" Relationship="Self.FK_PizzaStore_PizzaOrdersID" FromRole="Orders" ToRole="PizzaOrder" />
+        </EntityType>
+        <EntityType Name="PhoneNumber">
+          <Key>
+            <PropertyRef Name="PhoneNumberID" />
+          </Key>
+          <Property Name="PhoneNumberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_PizzaStore_PhoneNumberID" FromRole="PhoneNumber" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Pizza">
+          <Key>
+            <PropertyRef Name="PizzaID" />
+          </Key>
+          <Property Name="PizzaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CrustID" Type="Int32" />
+          <Property Name="SauceID" Type="Int32" />
+          <Property Name="SizeID" Type="Int32" />
+          <NavigationProperty Name="Crust" Relationship="Self.FK_PizzaStore_CurstID" FromRole="Pizza" ToRole="Crust" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_PizzaStore_PizzaID_Orders" FromRole="Pizza" ToRole="Orders" />
+          <NavigationProperty Name="PizzaCheeses" Relationship="Self.FK_PizzaStore_PizzaID" FromRole="Pizza" ToRole="PizzaCheeses" />
+          <NavigationProperty Name="PizzaToppings" Relationship="Self.FK_PizzaStore_PizzaToppingID" FromRole="Pizza" ToRole="PizzaToppings" />
+          <NavigationProperty Name="Sauce" Relationship="Self.FK_PizzaStore_SauceID" FromRole="Pizza" ToRole="Sauce" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_PizzaStore_SizeID" FromRole="Pizza" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="PizzaChees">
+          <Key>
+            <PropertyRef Name="PizzaCheeses" />
+          </Key>
+          <Property Name="PizzaCheeses" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaID" Type="Int32" />
+          <Property Name="CheeseID" Type="Int32" />
+          <NavigationProperty Name="Cheese" Relationship="Self.FK_PizzaStore_CheeseID" FromRole="PizzaCheeses" ToRole="Cheese" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK_PizzaStore_PizzaID" FromRole="PizzaCheeses" ToRole="Pizza" />
+        </EntityType>
+        <EntityType Name="PizzaOrder">
+          <Key>
+            <PropertyRef Name="PizzaOrderID" />
+          </Key>
+          <Property Name="PizzaOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_PizzaStore_CustomerID" FromRole="PizzaOrder" ToRole="Customer" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_PizzaStore_PizzaOrdersID" FromRole="PizzaOrder" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="PizzaTopping">
+          <Key>
+            <PropertyRef Name="PizzatoppingsID" />
+          </Key>
+          <Property Name="PizzatoppingsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaID" Type="Int32" />
+          <Property Name="ToppingID" Type="Int32" />
+          <NavigationProperty Name="Pizza" Relationship="Self.FK_PizzaStore_PizzaToppingID" FromRole="PizzaToppings" ToRole="Pizza" />
+          <NavigationProperty Name="Topping" Relationship="Self.FK_PizzaStore_ToppingID" FromRole="PizzaToppings" ToRole="Topping" />
+        </EntityType>
+        <EntityType Name="Sauce">
+          <Key>
+            <PropertyRef Name="SauceID" />
+          </Key>
+          <Property Name="SauceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pizzas" Relationship="Self.FK_PizzaStore_SauceID" FromRole="Sauce" ToRole="Pizza" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="SizeID" />
+          </Key>
+          <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Pizzas" Relationship="Self.FK_PizzaStore_SizeID" FromRole="Size" ToRole="Pizza" />
+        </EntityType>
+        <EntityType Name="Topping">
+          <Key>
+            <PropertyRef Name="ToppingID" />
+          </Key>
+          <Property Name="ToppingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PizzaToppings" Relationship="Self.FK_PizzaStore_ToppingID" FromRole="Topping" ToRole="PizzaToppings" />
+        </EntityType>
+        <Association Name="FK_PizzaStore_CheeseID">
+          <End Role="Cheese" Type="Self.Cheese" Multiplicity="0..1" />
+          <End Role="PizzaCheeses" Type="Self.PizzaChees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cheese">
+              <PropertyRef Name="CheeseID" />
+            </Principal>
+            <Dependent Role="PizzaCheeses">
+              <PropertyRef Name="CheeseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_CurstID">
+          <End Role="Crust" Type="Self.Crust" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crust">
+              <PropertyRef Name="CrustID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="CrustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_AddressID">
+          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerAddress">
+              <PropertyRef Name="AddressID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_CustomerID">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="PizzaOrder" Type="Self.PizzaOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="PizzaOrder">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_EmailID">
+          <End Role="Email" Type="Self.Email" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="EmailID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_NameID">
+          <End Role="Name" Type="Self.Name" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Name">
+              <PropertyRef Name="NameID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="NameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PhoneNumberID">
+          <End Role="PhoneNumber" Type="Self.PhoneNumber" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumber">
+              <PropertyRef Name="PhoneNumberID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="PhoneNumberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaID_Orders">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaOrdersID">
+          <End Role="PizzaOrder" Type="Self.PizzaOrder" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PizzaOrder">
+              <PropertyRef Name="PizzaOrderID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PizzaOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaID">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PizzaCheeses" Type="Self.PizzaChees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaCheeses">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_PizzaToppingID">
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PizzaToppings" Type="Self.PizzaTopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pizza">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaToppings">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_SauceID">
+          <End Role="Sauce" Type="Self.Sauce" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sauce">
+              <PropertyRef Name="SauceID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="SauceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_SizeID">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Pizza" Type="Self.Pizza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="SizeID" />
+            </Principal>
+            <Dependent Role="Pizza">
+              <PropertyRef Name="SizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PizzaStore_ToppingID">
+          <End Role="Topping" Type="Self.Topping" Multiplicity="0..1" />
+          <End Role="PizzaToppings" Type="Self.PizzaTopping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Topping">
+              <PropertyRef Name="ToppingID" />
+            </Principal>
+            <Dependent Role="PizzaToppings">
+              <PropertyRef Name="ToppingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaStoreDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cheese" EntityType="Self.Cheese" />
+          <EntitySet Name="Crusts" EntityType="Self.Crust" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerAddresses" EntityType="Self.CustomerAddress" />
+          <EntitySet Name="Emails" EntityType="Self.Email" />
+          <EntitySet Name="Names" EntityType="Self.Name" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumber" />
+          <EntitySet Name="Pizzas" EntityType="Self.Pizza" />
+          <EntitySet Name="PizzaCheeses" EntityType="Self.PizzaChees" />
+          <EntitySet Name="PizzaOrders" EntityType="Self.PizzaOrder" />
+          <EntitySet Name="PizzaToppings" EntityType="Self.PizzaTopping" />
+          <EntitySet Name="Sauces" EntityType="Self.Sauce" />
+          <EntitySet Name="Sizes" EntityType="Self.Size" />
+          <EntitySet Name="Toppings" EntityType="Self.Topping" />
+          <AssociationSet Name="FK_PizzaStore_CheeseID" Association="Self.FK_PizzaStore_CheeseID">
+            <End Role="Cheese" EntitySet="Cheese" />
+            <End Role="PizzaCheeses" EntitySet="PizzaCheeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_CurstID" Association="Self.FK_PizzaStore_CurstID">
+            <End Role="Crust" EntitySet="Crusts" />
+            <End Role="Pizza" EntitySet="Pizzas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_AddressID" Association="Self.FK_PizzaStore_AddressID">
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_CustomerID" Association="Self.FK_PizzaStore_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PizzaOrder" EntitySet="PizzaOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_EmailID" Association="Self.FK_PizzaStore_EmailID">
+            <End Role="Email" EntitySet="Emails" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_NameID" Association="Self.FK_PizzaStore_NameID">
+            <End Role="Name" EntitySet="Names" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PhoneNumberID" Association="Self.FK_PizzaStore_PhoneNumberID">
+            <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaID_Orders" Association="Self.FK_PizzaStore_PizzaID_Orders">
+            <End Role="Pizza" EntitySet="Pizzas" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaOrdersID" Association="Self.FK_PizzaStore_PizzaOrdersID">
+            <End Role="PizzaOrder" EntitySet="PizzaOrders" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaID" Association="Self.FK_PizzaStore_PizzaID">
+            <End Role="Pizza" EntitySet="Pizzas" />
+            <End Role="PizzaCheeses" EntitySet="PizzaCheeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_PizzaToppingID" Association="Self.FK_PizzaStore_PizzaToppingID">
+            <End Role="Pizza" EntitySet="Pizzas" />
+            <End Role="PizzaToppings" EntitySet="PizzaToppings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_SauceID" Association="Self.FK_PizzaStore_SauceID">
+            <End Role="Sauce" EntitySet="Sauces" />
+            <End Role="Pizza" EntitySet="Pizzas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_SizeID" Association="Self.FK_PizzaStore_SizeID">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="Pizza" EntitySet="Pizzas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PizzaStore_ToppingID" Association="Self.FK_PizzaStore_ToppingID">
+            <End Role="Topping" EntitySet="Toppings" />
+            <End Role="PizzaToppings" EntitySet="PizzaToppings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzaStoreDBModelStoreContainer" CdmEntityContainer="PizzaStoreDBEntities">
+          <EntitySetMapping Name="Cheese">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Cheese">
+              <MappingFragment StoreEntitySet="Cheese">
+                <ScalarProperty Name="CheeseID" ColumnName="CheeseID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Crusts">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Crust">
+              <MappingFragment StoreEntitySet="Crust">
+                <ScalarProperty Name="CrustID" ColumnName="CrustID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="NameId" ColumnName="NameId" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="PhoneNumberID" ColumnName="PhoneNumberID" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerAddresses">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.CustomerAddress">
+              <MappingFragment StoreEntitySet="CustomerAddress">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="CustomerAddress1" ColumnName="CustomerAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Email1" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Names">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Name">
+              <MappingFragment StoreEntitySet="Name">
+                <ScalarProperty Name="NameID" ColumnName="NameID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="PizzaOrderID" ColumnName="PizzaOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneNumbers">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.PhoneNumber">
+              <MappingFragment StoreEntitySet="PhoneNumber">
+                <ScalarProperty Name="PhoneNumberID" ColumnName="PhoneNumberID" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pizzas">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Pizza">
+              <MappingFragment StoreEntitySet="Pizza">
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="CrustID" ColumnName="CrustID" />
+                <ScalarProperty Name="SauceID" ColumnName="SauceID" />
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaCheeses">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.PizzaChees">
+              <MappingFragment StoreEntitySet="PizzaCheeses">
+                <ScalarProperty Name="PizzaCheeses" ColumnName="PizzaCheeses" />
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="CheeseID" ColumnName="CheeseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaOrders">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.PizzaOrder">
+              <MappingFragment StoreEntitySet="PizzaOrder">
+                <ScalarProperty Name="PizzaOrderID" ColumnName="PizzaOrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaToppings">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.PizzaTopping">
+              <MappingFragment StoreEntitySet="PizzaToppings">
+                <ScalarProperty Name="PizzatoppingsID" ColumnName="PizzatoppingsID" />
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="ToppingID" ColumnName="ToppingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sauces">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Sauce">
+              <MappingFragment StoreEntitySet="Sauce">
+                <ScalarProperty Name="SauceID" ColumnName="SauceID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Toppings">
+            <EntityTypeMapping TypeName="PizzaStoreDBModel.Topping">
+              <MappingFragment StoreEntitySet="Topping">
+                <ScalarProperty Name="ToppingID" ColumnName="ToppingID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
