@@ -34,5 +34,19 @@ namespace PizzaStore.Client
 
         [OperationContract]
         List<SizesDAO> GetSizes();
+
+        [OperationContract]
+        List<CustomerDAO> GetCustomers();
+
+
+
+        //[OperationContract]
+        //bool UpdateCustomerNumber(CustomerDAO c, NumberDAO p);
+        //[OperationContract]
+        //bool UpdateCustomerEmail(Customer c, Email e);
+        //[OperationContract]
+        //bool UpdateCustomerAddress(Customer c, CustomerAddress a);
+        //[OperationContract]
+        //bool UpdateCustomerName(CustomerDAO c, NameDAO n);
     }
 }

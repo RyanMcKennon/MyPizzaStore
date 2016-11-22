@@ -1,0 +1,50 @@
+﻿@model PizzaStoreMVC.ViewModel.PizzaStoreModel
+
+@{
+    ViewBag.Title = "Review";
+}
+@using (Html.BeginForm("Review", "PizzaStore", FormMethod.Post))
+{
+<h2>Order Preview</h2>
+
+    <div class="row">
+        <h3>Contact Information</h3>
+        <div class="col-sm-3">
+            @Html.DisplayFor(m => m.PizzaOrder.Customer.Name.FirstName, Model.PizzaOrder.Customer.Name.FirstName)
+             
+            @Html.DisplayFor(m => m.PizzaOrder.Customer.Name.LastName, Model.PizzaOrder.Customer.Name.LastName)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayFor(m => m.PizzaOrder.Customer.Number.Number, Model.PizzaOrder.Customer.Number.Number)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayFor(m => m.PizzaOrder.Customer.Email.Email, Model.PizzaOrder.Customer.Email.Email)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayFor(m => m.PizzaOrder.Customer.Address.Address, Model.PizzaOrder.Customer.Address.Address)
+        </div>
+    </div>
+
+    for (int i = 0; i < Model.PizzaOrder.Order.Pizzas.Count; i++)
+    {
+        <div class="row">
+            <h4>Pizza Details</h4>
+            @Html.DisplayFor(m => m.PizzaOrder.Order.Pizzas[i].Size.Name, Model.PizzaOrder.Order.Pizzas[i].Size.Name)
+            @Html.DisplayFor(m => m.PizzaOrder.Order.Pizzas[i].Crust.Name, Model.PizzaOrder.Order.Pizzas[i].Crust.Name)
+            @Html.DisplayFor(m => m.PizzaOrder.Order.Pizzas[i].Sauce.name, Model.PizzaOrder.Order.Pizzas[i].Sauce.name)
+            @{ 
+                for (int y = 0; y < Model.PizzaOrder.Order.Pizzas[i].Toppings.Count; y++)
+                {
+                    @Html.DisplayFor(m => m.PizzaOrder.Order.Pizzas[i].Toppings[y].Name, Model.PizzaOrder.Order.Pizzas[i].Toppings[y].Name)
+                }
+                for (int y = 0; y < Model.PizzaOrder.Order.Pizzas[i].Cheeses.Count; y++)
+                {
+                    @Html.DisplayFor(m => m.PizzaOrder.Order.Pizzas[i].Cheeses[y].Name, Model.PizzaOrder.Order.Pizzas[i].Cheeses[y].Name)
+                }
+            }
+        </div>
+
+                }
+                <button type="submit" class="btn">Complete Order</button>
+                }
+

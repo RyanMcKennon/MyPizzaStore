@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost/PizzaStore/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/PizzaStore/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/PizzaStore/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PizzaStore.Client.Models" />
+      <xsd:import schemaLocation="http://localhost/PizzaStore/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PizzaStore.DataAccess" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_InsertCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InsertCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InsertPizzaOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPizzaOrder" />
+  </wsdl:message>
+  <wsdl:message name="IService1_InsertPizzaOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPizzaOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetToppings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetToppings" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetToppings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetToppingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCheeses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheeses" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCheeses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCheesesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCrusts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCrusts" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetCrusts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCrustsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSauces_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSauces" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSauces_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSaucesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSizes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSizes" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSizes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSizesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="InsertCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InsertCustomer" message="tns:IService1_InsertCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InsertCustomerResponse" message="tns:IService1_InsertCustomer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPizzaOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/InsertPizzaOrder" message="tns:IService1_InsertPizzaOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/InsertPizzaOrderResponse" message="tns:IService1_InsertPizzaOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetToppings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetToppings" message="tns:IService1_GetToppings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetToppingsResponse" message="tns:IService1_GetToppings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheeses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCheeses" message="tns:IService1_GetCheeses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCheesesResponse" message="tns:IService1_GetCheeses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCrusts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCrusts" message="tns:IService1_GetCrusts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCrustsResponse" message="tns:IService1_GetCrusts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSauces">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSauces" message="tns:IService1_GetSauces_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetSaucesResponse" message="tns:IService1_GetSauces_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSizes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSizes" message="tns:IService1_GetSizes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetSizesResponse" message="tns:IService1_GetSizes_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertCustomer">
+      <soap:operation soapAction="http://tempuri.org/IService1/InsertCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPizzaOrder">
+      <soap:operation soapAction="http://tempuri.org/IService1/InsertPizzaOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetToppings">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetToppings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheeses">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCheeses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCrusts">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetCrusts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSauces">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetSauces" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSizes">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetSizes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost/PizzaStore/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

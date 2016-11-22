@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Landing";
+}
+
+@using (Html.BeginForm("Landing", "PizzaStore", FormMethod.Post))
+{
+    <div class="row">
+        <a href="~/PizzaStore/Index">Order Pizzas</a>
+    </div>
+    <div class="row">
+        <a href="~/PizzaStore/CustomerInfo">Customer Order History</a>
+    </div>
+
+}
+

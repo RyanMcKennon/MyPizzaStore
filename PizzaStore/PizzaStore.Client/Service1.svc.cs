@@ -20,11 +20,11 @@ namespace PizzaStore.Client
         
         public void InsertCustomer(CustomerDAO c)
         {
-            data.InsertCustomer(CustomerMapper.CustomerDAO_Customer(c),
-                                CustomerMapper.CustomerDAO_Name(c),
-                                CustomerMapper.CustomerDAO_Email(c),
-                                CustomerMapper.CustomerDAO_PhoneNumber(c),
-                                CustomerMapper.CustomerDAO_CustomerAddress(c));
+            data.InsertCustomer(new Customer { CustomerID = c.CustomerID },
+                                NameMapper.NameDAO_Name(c.name),
+                                EmailMapper.EmailDAO_Email(c.email),
+                                NumberMapper.NumberDAO_Number(c.number),
+                                AddressMapper.AddressDAO_Address(c.address));
         }
 
         public void InsertPizzaOrder(PizzaOrderDAO o)
@@ -38,11 +38,13 @@ namespace PizzaStore.Client
                 top.Add(PizzaMapper.PizzaDAO_Topping(item));
                 cheese.Add(PizzaMapper.PizzaDAO_Cheeses(item));
             }
-            data.InsertPizzaOrder(CustomerMapper.CustomerDAO_Customer(o.customer), p, top, cheese,
-                                  CustomerMapper.CustomerDAO_Email(o.customer),
-                                  CustomerMapper.CustomerDAO_Name(o.customer),
-                                  CustomerMapper.CustomerDAO_PhoneNumber(o.customer),
-                                  CustomerMapper.CustomerDAO_CustomerAddress(o.customer));
+
+            data.InsertPizzaOrder(new Customer { CustomerID = o.customer.CustomerID },
+                                    p, top, cheese,
+                                    EmailMapper.EmailDAO_Email(o.customer.email),
+                                    NameMapper.NameDAO_Name(o.customer.name),
+                                    NumberMapper.NumberDAO_Number(o.customer.number),
+                                    AddressMapper.AddressDAO_Address(o.customer.address));
         }
 
         public List<ToppingDAO> GetToppings()
@@ -100,10 +102,21 @@ namespace PizzaStore.Client
             return dao;
         }
 
-        public void UpdateCustomerEmail()
+        public List<CustomerDAO> GetCustomers()
         {
-
+            List<CustomerDAO> custs = new List<CustomerDAO>();
+            foreach (var item in data.GetCustomers())
+            {
+                
+            }
+            return custs;
         }
+
+        //public bool UpdateCustomerNumber(CustomerDAO c, NumberDAO p)
+        //{
+        //    //data.UpdateCustomerNumber();
+        //    return true;
+        //}
 
     }
 }

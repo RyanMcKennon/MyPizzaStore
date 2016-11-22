@@ -91,10 +91,10 @@ namespace PizzaStore.DataAccess
         public bool InsertPizzaOrder(Customer customer, List<Pizza> pizza, List<List<Topping>> topping, List<List<Cheese>> cheeses, Email email, Name name, PhoneNumber number, CustomerAddress address)
         {
             PizzaOrder pizzaorder = new PizzaOrder();
-            Customer result =  db.Customers.Where(x => x.PhoneNumberID == number.PhoneNumberID).FirstOrDefault();
+            PhoneNumber result =  db.PhoneNumbers.Where(x => x.PhoneNumber1 == number.PhoneNumber1).FirstOrDefault();
             if (result != null )
             {
-                pizzaorder.CustomerID = result.CustomerID;
+                pizzaorder.CustomerID = (db.Customers.Where(x => x.PhoneNumber.PhoneNumber1 == number.PhoneNumber1).FirstOrDefault()).CustomerID;
             }
             else
             {

@@ -106,5 +106,37 @@ namespace PizzaStore.Tests
 
             Assert.NotNull(actual);
         }
+
+        [Fact]
+        public void GetCustomerByID_Test()
+        {
+            var actual = data.GetCustomer(10);
+            Assert.NotNull(actual);
+        }
+
+        [Fact]
+        public void GetOrderByPizzaOrderID_Test()
+        {
+            var actual = data.GetOrderByID(3);
+            var expected = 2;
+            Assert.Equal(actual.Count, expected);
+        }
+
+        [Fact]
+        public void GetPizzaList_Test()
+        {
+            var actual = data.GetPizzaList(data.GetOrderByID(3));
+            var expected = 2;
+
+            Assert.Equal(actual.Count, expected);
+        }
+
+        [Fact]
+        public void GetToppingsByPizzaID()
+        {
+            var actual = data.GetToppingsOnPizza(5);
+            var expected = 2;
+            Assert.Equal(actual.Count, expected);
+        }
     }
 }

@@ -11,6 +11,6 @@ namespace PizzaStore.Client.Models
         [DataMember]
         public int OrderID { get; set; }
         [DataMember]
-        public List<PizzaDAO> pizzas {get;set;} 
+        public List<PizzaDAO> pizzas { get; set; }
     }
 }

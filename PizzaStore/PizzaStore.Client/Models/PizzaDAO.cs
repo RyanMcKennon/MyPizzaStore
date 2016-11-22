@@ -12,14 +12,14 @@ namespace PizzaStore.Client.Models
         [DataMember]
         public int PizzaID { get; set; }
         [DataMember]
-        public Sauce sauce { get; set; }
+        public SauceDAO sauce { get; set; }
         [DataMember]
-        public Crust crust { get; set; }
+        public CrustDAO crust { get; set; }
         [DataMember]
-        public Size size { get; set; }
+        public SizesDAO size { get; set; }
         [DataMember]
-        public List<Topping> toppings { get; set; }
+        public List<ToppingDAO> toppings { get; set; }
         [DataMember]
-        public List<Cheese> cheeses { get; set; }
+        public List<CheeseDAO> cheeses { get; set; }
     }
 }

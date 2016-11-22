@@ -12,12 +12,12 @@ namespace PizzaStore.Client.Models
         [DataMember]
         public int CustomerID { get; set; }
         [DataMember]
-        public Name name { get; set; }
+        public NameDAO name { get; set; }
         [DataMember]
-        public Email email { get; set; }
+        public EmailDAO email { get; set; }
         [DataMember]
-        public CustomerAddress address { get; set; }
+        public AddressDAO address { get; set; }
         [DataMember]
-        public PhoneNumber number { get; set; }
+        public NumberDAO number { get; set; }
     }
 }

@@ -74,16 +74,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\AddressMapper.cs" />
     <Compile Include="Mappers\CheeseMapper.cs" />
     <Compile Include="Mappers\CrustMapper.cs" />
     <Compile Include="Mappers\CustomerMapper.cs" />
+    <Compile Include="Mappers\EmailMapper.cs" />
+    <Compile Include="Mappers\NameMapper.cs" />
+    <Compile Include="Mappers\NumberMapper.cs" />
     <Compile Include="Mappers\PizzaMapper.cs" />
     <Compile Include="Mappers\SauceMapper.cs" />
     <Compile Include="Mappers\SizeMapper.cs" />
     <Compile Include="Mappers\ToppingMapper.cs" />
+    <Compile Include="Models\AddressDAO.cs" />
     <Compile Include="Models\CheeseDAO.cs" />
     <Compile Include="Models\CrustDAO.cs" />
     <Compile Include="Models\CustomerDAO.cs" />
+    <Compile Include="Models\EmailDAO.cs" />
+    <Compile Include="Models\NameDAO.cs" />
+    <Compile Include="Models\NumberDAO.cs" />
     <Compile Include="Models\OrderDAO.cs" />
     <Compile Include="Models\PizzaDAO.cs" />
     <Compile Include="Models\PizzaOrderDAO.cs" />

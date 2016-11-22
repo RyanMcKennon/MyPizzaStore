@@ -1,0 +1,65 @@
+﻿@model PizzaStoreMVC.ViewModel.PizzaStoreModel
+
+@{
+    ViewBag.Title = "Ordering";
+}
+
+@using (Html.BeginForm("Ordering", "PizzaStore", FormMethod.Post))
+{
+    <div class="row">
+        @{ 
+            for (int i = 0; i < Model.ListOfTopping.Count; i++)
+            {
+                @Html.LabelFor(m => m.ListOfTopping[i].Name, Model.ListOfTopping[i].Name);
+                @Html.CheckBoxFor(m => m.ListOfTopping[i].picked, Model.ListOfTopping);
+            }
+            }
+    </div>
+
+    <div class="row">
+        @{ 
+            for (int i = 0; i < Model.ListOfCheeses.Count; i++)
+            {
+                @Html.LabelFor(m => m.ListOfCheeses[i].Name, Model.ListOfCheeses[i].Name);
+                @Html.CheckBoxFor(m => m.ListOfCheeses[i].picked, Model.ListOfCheeses);
+            }
+        }
+    </div>
+
+    <div class="row">
+        @{ 
+            for (int i = 0; i < Model.ListOfCrusts.Count; i++)
+            {
+                @Html.LabelFor(m => m.ListOfCrusts[i].Name, Model.ListOfCrusts[i].Name);
+                @Html.CheckBoxFor(m => m.ListOfCrusts[i].picked, Model.ListOfCrusts);
+            }
+        }
+        
+        
+        
+    </div>
+
+    <div class="row">
+        @{
+            for (int i = 0; i < Model.ListOfSauces.Count; i++)
+            {
+                @Html.LabelFor(m => m.ListOfSauces[i].name, Model.ListOfSauces[i].name);
+                @Html.CheckBoxFor(m => m.ListOfSauces[i].picked, Model.ListOfSauces);
+            }
+        }
+    </div>
+
+    <div class="row">
+        @{
+            for (int i = 0; i < Model.ListOfSizes.Count; i++)
+            {
+                @Html.LabelFor(m => m.ListOfSizes[i].Name, Model.ListOfSizes[i].Name);
+                @Html.CheckBoxFor(m => m.ListOfSizes[i].picked, Model.ListOfSizes);
+            }
+        }
+    </div>
+    <button type="submit" class="btn">Add Pizza</button>
+    <a href="~/PizzaStore/Review">Review Order</a>
+
+}
+

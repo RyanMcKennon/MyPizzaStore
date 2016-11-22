@@ -1,0 +1,48 @@
+﻿@model PizzaStoreMVC.ViewModel.PizzaStoreModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("index", "PizzaStore", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.LabelFor(m => m.Customer.Name.FirstName, Model.Name)
+        </div>
+        @Html.TextBoxFor(m => m.Customer.Name.FirstName, Model.Name)
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.LabelFor(m => m.Customer.Name.LastName, Model.Name)
+        </div>
+        @Html.TextBoxFor(m => m.Customer.Name.LastName, Model.Name)
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.LabelFor(m => m.Customer.Number.Number, Model.Name)
+        </div>
+        @Html.TextBoxFor(m => m.Customer.Number.Number, Model.Name)
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.LabelFor(m => m.Customer.Email.Email, Model.Name)
+        </div>
+        @Html.TextBoxFor(m => m.Customer.Email.Email, Model.Name)
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-2">
+            @Html.LabelFor(m => m.Customer.Address.Address, Model.Name)
+        </div>
+        @Html.TextBoxFor(m => m.Customer.Address.Address, Model.Name)
+    </div>
+
+       <button type="submit" class="btn">Submit</button>
+
+}
+

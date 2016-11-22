@@ -1,4 +1,5 @@
-﻿using PizzaStore.Client.Models;
+﻿using PizzaStore.Client.Mappers;
+using PizzaStore.Client.Models;
 using PizzaStore.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -13,23 +14,29 @@ namespace PizzaStore.Client.Mappers
         {
             Pizza pizza = new Pizza();
             pizza.PizzaID = p.PizzaID;
-            pizza.Crust = p.crust;
-            pizza.Size = p.size;
-            pizza.Sauce = p.sauce;
+            pizza.Crust = CrustMapper.CrustDAO_Crust(p.crust);
+            pizza.Size = SizeMapper.SizeDAO_Size(p.size);
+            pizza.Sauce = SauceMapper.SauceDAO_Sauce(p.sauce);
             return pizza;
         }
 
         public static List<Topping> PizzaDAO_Topping(PizzaDAO p)
         {
             List<Topping> t = new List<Topping>();
-            t = p.toppings;
+            foreach (var item in p.toppings)
+            {
+                t.Add(ToppingMapper.ToppingDAO_Topping(item));
+            }
             return t;
         }
 
         public static List<Cheese> PizzaDAO_Cheeses(PizzaDAO p)
         {
             List<Cheese> c = new List<Cheese>();
-            c = p.cheeses;
+            foreach (var item in p.cheeses)
+            {
+                c.Add(CheeseMapper.CheeseDAO_Cheese(item));
+            }
             return c;
         }
     }
