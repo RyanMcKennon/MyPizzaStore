@@ -320,10 +320,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PizzaStore.Client\PizzaStore.Client.csproj">
-      <Project>{7711D15E-8FEF-40DE-BC9F-5489AB72D0FD}</Project>
-      <Name>PizzaStore.Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PizzaStore.DataAccess\PizzaStore.DataAccess.csproj">
       <Project>{50f35efc-c273-4e3b-9769-6328876fd466}</Project>
       <Name>PizzaStore.DataAccess</Name>
