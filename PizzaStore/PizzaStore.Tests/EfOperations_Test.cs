@@ -59,45 +59,45 @@ namespace PizzaStore.Tests
             Assert.True(actual);
         }
 
-        [Fact]
-        public void UpdateCustomerName_Test()
-        {
-            var actual = data.UpdateCustomerName(new Customer { NameId = 1},new Name { FirstName = "RJ", LastName = "MC" });
+        //[Fact]
+        //public void UpdateCustomerName_Test()
+        //{
+        //    var actual = data.UpdateCustomerName(new Customer { NameId = 1},new Name { FirstName = "RJ", LastName = "MC" });
 
-            Assert.True(actual);
-        }
+        //    Assert.True(actual);
+        //}
 
-        [Fact]
-        public void UpdateCustomerNumber_Test()
-        {
-            var actual = data.UpdateCustomerNumber(new Customer { PhoneNumberID = 1 }, new PhoneNumber { PhoneNumber1 = "9876543" });
+        //[Fact]
+        //public void UpdateCustomerNumber_Test()
+        //{
+        //    var actual = data.UpdateCustomerNumber(new Customer { PhoneNumberID = 1 }, new PhoneNumber { PhoneNumber1 = "9876543" });
 
-            Assert.True(actual);
-        }
+        //    Assert.True(actual);
+        //}
 
-        [Fact]
-        public void UpdateCustomerEmial_Test()
-        {
-            var actual = data.UpdateCustomerEmail(new Customer { EmailID = 1 }, new Email { Email1 = "Memes@inc.edu" });
+        //[Fact]
+        //public void UpdateCustomerEmial_Test()
+        //{
+        //    var actual = data.UpdateCustomerEmail(new Customer { EmailID = 1 }, new Email { Email1 = "Memes@inc.edu" });
 
-            Assert.True(actual);
-        }
+        //    Assert.True(actual);
+        //}
 
-        [Fact]
-        public void UpdateCustomerAddress_Test()
-        {
-            var actual = data.UpdateCustomerAddress(new Customer { AddressID = 1 }, new CustomerAddress { CustomerAddress1 = "234 Memes" });
+        //[Fact]
+        //public void UpdateCustomerAddress_Test()
+        //{
+        //    var actual = data.UpdateCustomerAddress(new Customer { AddressID = 1 }, new CustomerAddress { CustomerAddress1 = "234 Memes" });
 
-            Assert.True(actual);
-        }
+        //    Assert.True(actual);
+        //}
 
-        [Fact]
-        public void DeletePizzaOrder_Test()
-        {
-            var actual = data.DeleteOrder(new PizzaOrder { PizzaOrderID = 2, CustomerID = 2 });
+        //[Fact]
+        //public void DeletePizzaOrder_Test()
+        //{
+        //    var actual = data.DeleteOrder(new PizzaOrder { PizzaOrderID = 2, CustomerID = 2 });
 
-            Assert.True(actual);
-        }
+        //    Assert.True(actual);
+        //}
 
         [Fact]
         public void GetToppings_Test()
